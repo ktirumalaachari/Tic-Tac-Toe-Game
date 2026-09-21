@@ -44,12 +44,6 @@ No external framework or library dependencies — 100% lightweight and instant-l
 
 ---
 
-## 🌐 Live Demo
-
-🔗 **[https://tic-tac-toe-game-nine-fawn.vercel.app/](https://tic-tac-toe-game-nine-fawn.vercel.app/)**
-
----
-
 ## ✨ Key Upgrades & Features
 
 - 🤖 **Minimax AI** — Play against an unbeatable AI using Alpha-Beta Pruning or choose easier adaptive modes.
