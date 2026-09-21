@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#07091a">
+    <meta name="description" content="GridMind AI — Premium Tic-Tac-Toe with AI opponent, stunning themes, and immersive sound">
+    <title>GridMind AI — Premium Tic-Tac-Toe</title>
+    <link rel="icon" type="image/svg+xml" href="assets/GridMind.svg">
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body class="theme-midnight">
+    <!-- ═══ Splash Screen ═══ -->
+    <div id="splash">
+        <svg class="splash-logo" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+            <path d="M 25 25 L 75 75" stroke-dasharray="71" stroke-dashoffset="71">
+                <animate attributeName="stroke-dashoffset" values="71;0" dur="0.6s" begin="0.2s" fill="freeze"/>
+            </path>
+            <path d="M 75 25 L 25 75" stroke-dasharray="71" stroke-dashoffset="71">
+                <animate attributeName="stroke-dashoffset" values="71;0" dur="0.6s" begin="0.5s" fill="freeze"/>
+            </path>
+            <circle cx="50" cy="50" r="30" stroke-dasharray="188" stroke-dashoffset="188" opacity="0.5">
+                <animate attributeName="stroke-dashoffset" values="188;0" dur="0.8s" begin="0.9s" fill="freeze"/>
+            </circle>
+        </svg>
+        <div class="splash-title">GridMind AI</div>
+        <div class="splash-subtitle">Premium Tic-Tac-Toe Experience</div>
+    </div>
+
+    <!-- ═══ Floating Background Particles ═══ -->
+    <div id="floating-particles"></div>
+
+    <!-- ═══ Main App ═══ -->
+    <div id="app">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="branding">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M4 4l16 16M20 4L4 20"/>
+                    </svg>
+                </div>
+                <span class="brand-text">GridMind AI</span>
+            </div>
+            <button class="settings-btn" id="btn-settings" aria-label="Settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Status -->
+        <div class="status-bar">
+            <div class="turn-indicator x-turn">Player X's Turn</div>
+            <div class="game-timer">00:00</div>
+        </div>
+
+        <!-- Scores -->
+        <div class="scores">
+            <div class="score-box p1">
+                <span class="label">Player X</span>
+                <span class="score" id="score-x">0</span>
+            </div>
+            <div class="score-box ties">
+                <span class="label">Ties</span>
+                <span class="score" id="score-ties">0</span>
+            </div>
+            <div class="score-box p2">
+                <span class="label">Player O</span>
+                <span class="score" id="score-o">0</span>
+            </div>
+        </div>
+
+        <!-- Win Streak -->
+        <div class="streak-bar">
+            <span class="fire">🔥</span>
+            <span>Win Streak:</span>
+            <span class="count" id="streak-count">0</span>
+        </div>
+
+        <!-- Game Board -->
+        <div class="board-container">
+            <div id="board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+        </div>
+
+        <!-- AI Thinking -->
+        <div class="ai-thinking">
+            <div class="thinking-dots"><span></span><span></span><span></span></div>
+            <span>AI is thinking...</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-bottom">
+            <button class="btn btn-primary" id="btn-new-game">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/>
+                    <path d="M21 3v5h-5"/>
+                    <path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/>
+                    <path d="M3 21v-5h5"/>
+                </svg>
+                New Game
+            </button>
+            <button class="btn btn-secondary" id="btn-reset-scores">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M3 6h18"/>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                </svg>
+                Reset Scores
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            Built with ❤️ — <span>GridMind AI</span> © 2026
+        </footer>
+    </div>
+
+    <!-- ═══ Settings Panel ═══ -->
+    <div class="settings-overlay"></div>
+    <div class="settings-panel">
+        <div class="settings-header">
+            <h3>⚙️ Settings</h3>
+            <button class="close-btn" aria-label="Close">✕</button>
+        </div>
+
+        <!-- Game Mode -->
+        <div class="setting-group">
+            <label>Game Mode</label>
+            <div class="option-buttons">
+                <button class="opt-btn active" data-mode="pvp">👥 Player vs Player</button>
+                <button class="opt-btn" data-mode="ai">🤖 Player vs AI</button>
+            </div>
+        </div>
+
+        <!-- AI Difficulty -->
+        <div class="setting-group" id="ai-diff-group" style="display: none">
+            <label>AI Difficulty</label>
+            <div class="option-buttons">
+                <button class="opt-btn" data-diff="easy">😊 Easy (Random)</button>
+                <button class="opt-btn" data-diff="medium">🧠 Medium (Adaptive)</button>
+                <button class="opt-btn active" data-diff="hard">💀 Hard (Unbeatable)</button>
+            </div>
+        </div>
+
+        <!-- Theme -->
+        <div class="setting-group">
+            <label>Theme</label>
+            <div class="option-buttons">
+                <button class="opt-btn active" data-theme="midnight">🌙 Midnight</button>
+                <button class="opt-btn" data-theme="aurora">🌌 Aurora</button>
+                <button class="opt-btn" data-theme="crimson">🔥 Crimson</button>
+                <button class="opt-btn" data-theme="frost">❄️ Frost</button>
+            </div>
+        </div>
+
+        <!-- Sound Effects -->
+        <div class="setting-group">
+            <label>Audio</label>
+            <div class="toggle-row">
+                <span class="toggle-label">🔊 Sound Effects</span>
+                <input type="checkbox" class="toggle-switch" id="sfx-toggle" checked>
+            </div>
+            <div class="toggle-row" style="margin-top: 0.5rem">
+                <span class="toggle-label">🎵 Background Music</span>
+                <input type="checkbox" class="toggle-switch" id="music-toggle">
+            </div>
+            <div class="volume-row">
+                <span>🔈</span>
+                <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="60">
+                <span class="volume-value" id="volume-value">60%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Celebration Particles Container ═══ -->
+    <div id="particles-container"></div>
+
+    <script src="Script.js"></script>
+</body>
+
+</html>
